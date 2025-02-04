@@ -23,6 +23,17 @@ function App() {
       badgeLetter: companyName.substring(0, 1).toLocaleUpperCase(),
     };
     setFeedbackList([...feedBackList, newItem]);
+    await fetch(
+      "https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks",
+      {
+        method: "POST",
+        body: JSON.stringify(newItem),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
   };
 
   useEffect(() => {
