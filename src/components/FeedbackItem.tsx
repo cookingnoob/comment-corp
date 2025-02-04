@@ -17,7 +17,7 @@ export default function FeedbackItem({ feedBackItem }: FeedBackItemProps) {
       </div>
 
       <div>
-        <p>{feedBackItem.companyName}</p>
+        <p>{feedBackItem.company}</p>
         <p>{feedBackItem.text}</p>
       </div>
 

@@ -9,7 +9,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const addItemToList = (text: string) => {
+  const addItemToList = async (text: string) => {
     const companyName = text
       .split(" ")
       .find((w) => w.includes("#"))!
@@ -19,7 +19,7 @@ function App() {
       upvoteCount: 0,
       daysAgo: 0,
       text: text,
-      companyName: companyName,
+      company: companyName,
       badgeLetter: companyName.substring(0, 1).toLocaleUpperCase(),
     };
     setFeedbackList([...feedBackList, newItem]);
