@@ -1,10 +1,14 @@
 type HastagElementProps = {
   name: string;
+  addCompanyFilter: (name: string) => void;
 };
-export default function HastagItem({ name }: HastagElementProps) {
+export default function HastagItem({
+  name,
+  addCompanyFilter,
+}: HastagElementProps) {
   return (
-    <li key={name}>
-      <button>#{name}</button>
+    <li>
+      <button onClick={() => addCompanyFilter(name)}>#{name}</button>
     </li>
   );
 }

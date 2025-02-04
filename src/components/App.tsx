@@ -8,6 +8,11 @@ function App() {
   const [feedBackList, setFeedbackList] = useState<TFeedbackItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [filter, setFilter] = useState("");
+
+  const itemsForDisplay = filter
+    ? feedBackList.filter((c) => c.company === filter)
+    : feedBackList;
 
   const companyNames = feedBackList
     .map((i) => i.company)
@@ -42,6 +47,10 @@ function App() {
     );
   };
 
+  const addCompanyFilter = (name: string) => {
+    setFilter(name);
+  };
+
   useEffect(() => {
     setIsLoading(true);
     const fetchFeedbackData = async () => {
@@ -66,12 +75,15 @@ function App() {
     <div className="app">
       <Footer />
       <Container
-        feedBackList={feedBackList}
+        feedBackList={itemsForDisplay}
         errorMessage={errorMessage}
         isLoading={isLoading}
         addItemToList={addItemToList}
       />
-      <HashtagList companyNames={companyNames} />
+      <HashtagList
+        companyNames={companyNames}
+        addCompanyFilter={addCompanyFilter}
+      />
     </div>
   );
 }
