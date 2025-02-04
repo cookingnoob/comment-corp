@@ -52,6 +52,7 @@ function App() {
         feedBackList={feedBackList}
         errorMessage={errorMessage}
         isLoading={isLoading}
+        addItemToList={addItemToList}
       />
       <HashtagList />
     </div>
