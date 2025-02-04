@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 import Container from "./layout/Container";
 import Footer from "./layout/Footer";
-import HashtagList from "./HashtagList";
+import HashtagList from "./hashtag/HashtagList";
 import { TFeedbackItem } from "../lib/types";
 
 function App() {
   const [feedBackList, setFeedbackList] = useState<TFeedbackItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const companyNames = feedBackList
+    .map((i) => i.company)
+    .filter((name, index, array) => {
+      return array.indexOf(name) === index;
+    });
 
   const addItemToList = async (text: string) => {
     const companyName = text
@@ -65,7 +71,7 @@ function App() {
         isLoading={isLoading}
         addItemToList={addItemToList}
       />
-      <HashtagList />
+      <HashtagList companyNames={companyNames} />
     </div>
   );
 }
