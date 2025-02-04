@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import Container from "./Container";
 import Footer from "./Footer";
 import HashtagList from "./HashtagList";
+import { TFeedbackItem } from "../lib/types";
 
 function App() {
   const [feedBackList, setFeedbackList] = useState<TFeedbackItem[]>([]);
@@ -42,10 +44,15 @@ function App() {
     };
     fetchFeedbackData();
   }, []);
+
   return (
     <div className="app">
       <Footer />
-      <Container />
+      <Container
+        feedBackList={feedBackList}
+        errorMessage={errorMessage}
+        isLoading={isLoading}
+      />
       <HashtagList />
     </div>
   );
