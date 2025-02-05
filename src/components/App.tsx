@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Container from "./layout/Container";
 import Footer from "./layout/Footer";
 import HashtagList from "./hashtag/HashtagList";
@@ -10,21 +10,28 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [filter, setFilter] = useState("");
 
-  const itemsForDisplay = filter
-    ? feedBackList.filter((c) => c.company === filter)
-    : feedBackList;
+  const itemsForDisplay = useMemo(
+    () =>
+      filter ? feedBackList.filter((c) => c.company === filter) : feedBackList,
+    [filter, feedBackList]
+  );
 
-  const companyNames = feedBackList
-    .map((i) => i.company)
-    .filter((name, index, array) => {
-      return array.indexOf(name) === index;
-    });
+  const companyNames = useMemo(
+    () =>
+      feedBackList
+        .map((i) => i.company)
+        .filter((name, index, array) => {
+          return array.indexOf(name) === index;
+        }),
+    [feedBackList]
+  );
 
   const addItemToList = async (text: string) => {
     const companyName = text
       .split(" ")
       .find((w) => w.includes("#"))!
       .substring(1);
+
     const newItem: TFeedbackItem = {
       id: new Date().getTime(),
       upvoteCount: 0,
@@ -33,7 +40,9 @@ function App() {
       company: companyName,
       badgeLetter: companyName.substring(0, 1).toLocaleUpperCase(),
     };
+
     setFeedbackList([...feedBackList, newItem]);
+
     await fetch(
       "https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks",
       {
