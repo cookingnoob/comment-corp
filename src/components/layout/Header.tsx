@@ -1,19 +1,17 @@
+import { useFeedbackListContext } from "../../lib/hooks";
 import FeedbackForm from "../feedback/FeedbackForm";
 import Logo from "../Logo";
 import PageHeading from "../PageHeading";
 import Pattern from "../Pattern";
 
-type HeaderProps = {
-  addItemToList: (text: string) => void;
-};
-
-export default function Header({ addItemToList }: HeaderProps) {
+export default function Header() {
+  const { handleAddToList } = useFeedbackListContext();
   return (
     <header>
       <Pattern />
       <Logo />
       <PageHeading />
-      <FeedbackForm onAddItemToList={addItemToList} />
+      <FeedbackForm onAddItemToList={handleAddToList} />
     </header>
   );
 }

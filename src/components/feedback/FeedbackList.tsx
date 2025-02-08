@@ -1,19 +1,10 @@
 import FeedbackItem from "./FeedbackItem";
 import Spinner from "../Spinner";
 import ErrorMessage from "../ErrorMessage";
-import { TFeedbackItem } from "../../lib/types";
+import { useFeedbackListContext } from "../../lib/hooks";
 
-type FeedbackListProps = {
-  feedBackList: TFeedbackItem[];
-  isLoading: boolean;
-  errorMessage: string;
-};
-
-export default function FeedbackList({
-  feedBackList,
-  isLoading,
-  errorMessage,
-}: FeedbackListProps) {
+export default function FeedbackList() {
+  const { isLoading, errorMessage, feedBackList } = useFeedbackListContext();
   return (
     <ol className="feedback-list">
       {isLoading && <Spinner />}
