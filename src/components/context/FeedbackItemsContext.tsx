@@ -2,7 +2,6 @@ import { createContext } from "react";
 import { TFeedbackItem } from "../../lib/types";
 
 type TFeedbackItemsContext = {
-  feedBackList: TFeedbackItem[];
   filteredFeedbackItems: TFeedbackItem[];
   isLoading: boolean;
   errorMessage: string;
