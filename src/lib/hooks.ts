@@ -16,8 +16,8 @@ export function useFeedbackList() {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    setIsLoading(true);
     const fetchFeedbackData = async () => {
+      setIsLoading(true);
       try {
         const response = await fetch(
           "https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks"
